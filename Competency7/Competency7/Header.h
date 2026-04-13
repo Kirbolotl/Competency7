@@ -1,15 +1,17 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 const string filename = "Questions.txt";
 const int num_questions = 10;
-const int num_awnsers = 4;
+const int num_answers = 4;
+const int SIZE = 30;
 
 struct Question {
 	string question;
-	string answers[num_awnsers];
+	string answers[num_answers];
 	int correctIndex;
 };
 
@@ -21,3 +23,14 @@ bool InitQuestions(Question questions[]);
 //void ShowFinalScores(int playerOnePoints, int playerTwoPoints);
 void Goodbye();
 bool DoAgain();
+
+
+
+
+//for (int a = 0; a < 31; a++) {
+//	getline(QuestionFile, TriviaAnswers,',');
+//	if (a == 31) {
+//		getline(QuestionFile, TriviaAnswers, '\n');
+//	}
+//	cout << TriviaAnswers << endl;
+//}

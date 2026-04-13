@@ -8,15 +8,32 @@ bool InitQuestions(Question questions[]) {
 	ifstream QuestionFile;
 	QuestionFile.open(filename.c_str());
 	string TriviaQuestions;
+	string TriviaAnswers;
+	string TriviaCorrectIndex;
+
 	if (!QuestionFile) {
-		cout << "File Did Not Open";
+		cout << "File Did Not Open\n";
 		return false;
 	}
 
-	//while (getline(QuestionFile, TriviaQuestions)) {
-	//	cout << TriviaQuestions << endl;
-	//}
-	//
+
+	for (int i = 0; i < num_questions; i++) {
+		getline(QuestionFile, TriviaQuestions);
+		questions[i].question = TriviaQuestions;
+	}
+	
+	for (int a = 0; a < 40; a++) {
+		if ((a % 4) == 0 && a !=0 || a==3) {
+			getline(QuestionFile, TriviaAnswers);
+		}
+		else {
+			getline(QuestionFile, TriviaAnswers, ',');
+		}
+		cout << a << ". " << TriviaAnswers << endl;
+	}
+	
+	
+	
 }
 
 void Goodbye() {
