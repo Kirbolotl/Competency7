@@ -5,35 +5,54 @@ void WriteHeader() {
 }
 
 bool InitQuestions(Question questions[]) {
+
 	ifstream QuestionFile;
 	QuestionFile.open(filename.c_str());
 	string TriviaQuestions;
 	string TriviaAnswers;
 	string TriviaCorrectIndex;
+	int final = 3;
+	int AnsIndex = 0;
+	int QuesIndex = 0;
+	const int number_answers = 40;
 
 	if (!QuestionFile) {
 		cout << "File Did Not Open\n";
 		return false;
 	}
 
-
 	for (int i = 0; i < num_questions; i++) {
 		getline(QuestionFile, TriviaQuestions);
 		questions[i].question = TriviaQuestions;
 	}
 	
-	for (int a = 0; a < 40; a++) {
-		if ((a % 4) == 0 && a !=0 || a==3) {
+	for (int a = 0; a < number_answers; a++) {
+		
+		if (a == final) {
 			getline(QuestionFile, TriviaAnswers);
+			final += 4;
 		}
 		else {
 			getline(QuestionFile, TriviaAnswers, ',');
 		}
-		cout << a << ". " << TriviaAnswers << endl;
+
+		questions[QuesIndex].answers[AnsIndex] = TriviaAnswers;
+		AnsIndex += 1;
+		
+		if (AnsIndex > 3) {
+			AnsIndex = 0;
+			QuesIndex += 1;
+			
+		}
 	}
-	
-	
-	
+
+	for (int j = 0; j < num_questions; j++) {
+		int IndexStoI;
+		getline(QuestionFile, TriviaCorrectIndex);
+		IndexStoI = stoi(TriviaCorrectIndex);
+		questions[j].correctIndex = IndexStoI;
+	}
+
 }
 
 void Goodbye() {

@@ -13,16 +13,6 @@ int main()
 
     do {
        InitQuestions(triviaQuestion);
-       /*for (int i = 0; i < num_questions; i++) {
-            cout << "Question: " << triviaQuestion[i].question << endl;
-            for (int a = 0; a < num_answers; a++) {
-                cout << abcd[a] << triviaQuestion[i].answers[a] << endl;
-            }
-        }*/
-        //cout << triviaQuestion[0].answers[3];
-
-
-
     } while (DoAgain());
 
     Goodbye();

@@ -2,12 +2,14 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <sstream>
 using namespace std;
 
 const string filename = "Questions.txt";
 const int num_questions = 10;
 const int num_answers = 4;
 const int SIZE = 30;
+
 
 struct Question {
 	string question;
@@ -25,12 +27,15 @@ void Goodbye();
 bool DoAgain();
 
 
+//display
+/*
+       for (int i = 0; i < num_questions; i++) {
+            cout << "\nQuestion: " << triviaQuestion[i].question << endl;
+            for (int a = 0; a < num_answers; a++) {
+                cout << abcd[a] << triviaQuestion[i].answers[a] << endl;
+            }
+            int idk = triviaQuestion[i].correctIndex;
+            cout << "Correct Answer: " << triviaQuestion[i].correctIndex << " Letter: " << abcd[idk] << endl;
+       }
 
-
-//for (int a = 0; a < 31; a++) {
-//	getline(QuestionFile, TriviaAnswers,',');
-//	if (a == 31) {
-//		getline(QuestionFile, TriviaAnswers, '\n');
-//	}
-//	cout << TriviaAnswers << endl;
-//}
+*/
