@@ -1,0 +1,3 @@
+﻿  Header.cpp
+C:\Users\Jacob\Downloads\Competency7-main\Competency7-main\Competency7\Competency7\Header.cpp(49,1): warning C4715: 'InitQuestions': not all control paths return a value
+  Competency7.vcxproj -> C:\Users\Jacob\Downloads\Competency7-main\Competency7-main\Competency7\x64\Debug\Competency7.exe
