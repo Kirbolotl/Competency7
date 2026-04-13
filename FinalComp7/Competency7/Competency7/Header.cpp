@@ -1,0 +1,131 @@
+#include "Header.h"
+
+string abcd[4] = { "1. ","2. ","3. ","4. " };
+
+
+void WriteHeader() {
+	cout << "Jacob Diaz, Competency 7,The Purpose of this program is to make a two player trivia game\n";
+}
+
+bool InitQuestions(Question questions[]) {
+
+	ifstream QuestionFile;
+	QuestionFile.open(filename.c_str());
+	string TriviaQuestions;
+	string TriviaAnswers;
+	string TriviaCorrectIndex;
+	int final = 3;
+	int AnsIndex = 0;
+	int QuesIndex = 0;
+	const int number_answers = 40;
+
+	if (!QuestionFile) {
+		cout << "\nERROR. File Did Not Open\n";
+		return false;
+	}
+
+	for (int i = 0; i < num_questions; i++) {
+		getline(QuestionFile, TriviaQuestions);
+		questions[i].question = TriviaQuestions;
+	}
+	
+	for (int a = 0; a < number_answers; a++) {
+		
+		if (a == final) {
+			getline(QuestionFile, TriviaAnswers);
+			final += 4;
+		}
+		else {
+			getline(QuestionFile, TriviaAnswers, ',');
+		}
+
+		questions[QuesIndex].answers[AnsIndex] = TriviaAnswers;
+		AnsIndex += 1;
+		
+		if (AnsIndex > 3) {
+			AnsIndex = 0;
+			QuesIndex += 1;
+			
+		}
+
+	}
+
+	for (int j = 0; j < num_questions; j++) {
+		int IndexStoI;
+		getline(QuestionFile, TriviaCorrectIndex);
+		IndexStoI = stoi(TriviaCorrectIndex);
+		questions[j].correctIndex = IndexStoI;
+	}
+
+	return true;
+}
+
+void DisplayQuestion(Question questions[], int index) {
+	cout << "\nQuestion: " << questions[index].question << endl;
+	for (int a = 0; a < num_answers; a++) {
+		cout << abcd[a] << questions[index].answers[a] << endl;
+	}
+}
+
+bool CheckAnswer(Question questions[], int questionNum, int playerAnswer) {
+	int CorrectAnswerIndex = questions[questionNum].correctIndex;
+	string CorrectAnswerString = questions[questionNum].answers[CorrectAnswerIndex];
+	int UserAnswer = playerAnswer - 1;
+
+	if (CorrectAnswerIndex != UserAnswer) {
+		cout << "\nIncorrect. The Correct Answer was (" << (CorrectAnswerIndex +1) << ". " << CorrectAnswerString << ")" << endl;
+		return false;
+	}
+
+	cout << "\nCorrect!" << endl;
+	return true;
+}
+
+void PlayARound(Question questions[], int& questionNum, int& playerPoints) {
+	DisplayQuestion(questions, questionNum);
+
+	int player_answer;
+
+	while (true) {
+		cout << "\nEnter Your Answer: ";
+		cin >> player_answer;
+		if (player_answer > 0 && player_answer < 5) {
+			break;
+		}
+		cout << "Invalid Choice. Please Choose 1-4.";
+	}
+	bool pointCheck = CheckAnswer(questions, questionNum, player_answer);
+
+	if (pointCheck == true) {
+		playerPoints += 1;
+	}
+
+	questionNum += 1;
+	
+}
+
+void ShowFinalScores(int playerOnePoints, int playerTwoPoints) {
+	if (playerOnePoints > playerTwoPoints) {
+		cout << "\nPlayer One WINS!!!" << endl;
+	}
+	if (playerTwoPoints > playerOnePoints) {
+		cout << "\nPlayer Two WINS!!!" << endl;
+	}
+	if (playerOnePoints == playerTwoPoints) {
+		cout << "\nThis Game is a tie!" << endl;
+	}
+	cout << "\n|Score Board|\nPlayer 1 got " << playerOnePoints << " Points\nPlayer 2 got " << playerTwoPoints << " Points" << endl;
+}
+
+
+void Goodbye() {
+	cout << "\nThank you for using this Program! Goodbye.\n";
+}
+
+bool DoAgain() {
+	cout << "\nWould you like to play again? (Y/N): ";
+	string userchoice;
+	cin >> userchoice;
+	if (userchoice == "Y") {return true;}
+	else { return false; }
+}
